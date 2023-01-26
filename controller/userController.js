@@ -61,5 +61,17 @@ module.exports={
                 }
             })
         }
+    },
+    setAvatar: async(req, res)=>{
+
+    },
+    getUserById: async(req, res, next)=>{
+        const id = req.params.id;
+        try{
+            const users = await User.find({_id: {$ne: id}}).select(["name", "email", "_id"]);
+            return res.json(users)
+        }catch(err){
+            next(err)
+        }
     }
 }
